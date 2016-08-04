@@ -1,9 +1,18 @@
-:host >>> .chart rect {
+:host >>> .bar {
   fill: steelblue;
 }
 
-:host >>> .chart text {
-  fill: white;
+:host >>> .axis text {
   font: 10px sans-serif;
-  text-anchor: end;
+}
+
+:host >>> .axis path,
+:host >>> .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+:host >>> .x.axis path {
+  display: none;
 }
