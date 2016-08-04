@@ -1,0 +1,9 @@
+:host >>> .chart rect {
+  fill: steelblue;
+}
+
+:host >>> .chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
