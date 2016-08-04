@@ -40,5 +40,5 @@ typings
 
 
 # Transpiled files
-/app/*.map
-/app/*.js
+/app/**/*.map
+/app/**/*.js
