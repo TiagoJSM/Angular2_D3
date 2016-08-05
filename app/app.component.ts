@@ -9,6 +9,7 @@ import './rxjs-extensions';
      <h1>{{title}}</h1>
 	<nav>
     <a [routerLink]="['/bar-chart']" routerLinkActive="active">Bar Chart</a>
+    <a [routerLink]="['/circles']" routerLinkActive="active">Circles</a>
 	</nav>
 	<router-outlet></router-outlet>
   `,
