@@ -20,8 +20,6 @@ export class StackedChartComponent implements OnInit {
 		const percentages = ["returnSeeking", "capitalPreserved"];
         const svgElem = d3.select(".svg");
 
-        //const parseDate = d3.time.format("%m/%Y").parse;
-
         const margin = {top: 20, right: 50, bottom: 30, left: 20},
             width = +svgElem.attr("width") - margin.left - margin.right,
             height = +svgElem.attr("height") - margin.top - margin.bottom;
@@ -46,28 +44,46 @@ export class StackedChartComponent implements OnInit {
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        const layers = d3.layout.stack<{x: string, y: number, y0: number}>()(percentages.map(function(c) {
-            return data.map(function(d) {
+        const c = percentages.map(c => {
+            return data.map(d => {
+                return {x: d.source, y: d[c]};
+            }) as any;
+        });
+
+        const layers = d3.layout.stack<{x: string, y: number, y0: number}>()(percentages.map(c => {
+            return data.map(d => {
                 return {x: d.source, y: d[c]};
             }) as any;
         }));
 
-        x.domain(layers[0].map(function(d) { return d.x; }) as any);
-        y.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.y0 + d.y; })]).nice();
+        x.domain(layers[0].map(d => d.x) as any);
+        y.domain([0, d3.max(layers[layers.length - 1], d => d.y0 + d.y)]).nice();
+
+        const barHeight = d => y(d.y0) - y(d.y + d.y0);
 
         const layer = svg.selectAll(".layer")
             .data(layers)
             .enter().append("g")
             .attr("class", "layer")
-            .style("fill", function(d, i) { return z(i); });
+            .style("fill", (d, i) => z(i.toString()));
 
         layer.selectAll("rect")
-            .data<{x: string, y: number, y0: number}>(function(d) { return d; })
+            .data<{x: string, y: number, y0: number}>(d => d)
             .enter().append("rect")
-            .attr("x", function(d) { return x(d.x); })
-            .attr("y", function(d) { return y(d.y + d.y0); })
-            .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
+            .attr("x", d => x(d.x))
+            .attr("y", d =>  y(d.y + d.y0))
+            .attr("height", d =>  barHeight(d))
             .attr("width", x.rangeBand() - 1);
+        
+        layer.selectAll("text")
+            .data<{x: string, y: number, y0: number}>(d => d)
+            .enter().append("text")
+            .attr("class", "bar-text")
+            .attr("fill", "white")
+            .attr("x", d => x.rangeBand()/2 + x(d.x))
+            .attr("y", d => y(d.y + d.y0) + barHeight(d)/2)
+            .attr("width", x.rangeBand() - 1)
+            .text(d => d.y );
 
         svg.append("g")
             .attr("class", "axis axis--y")

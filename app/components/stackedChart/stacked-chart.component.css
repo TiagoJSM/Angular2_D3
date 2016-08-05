@@ -12,3 +12,7 @@
 :host >>> .axis--x path {
   display: none;
 }
+
+:host >>> .bar-text {
+  text-anchor: middle;
+}
