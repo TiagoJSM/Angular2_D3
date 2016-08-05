@@ -1,0 +1,14 @@
+:host >>> .axis text {
+  font: 10px sans-serif;
+}
+
+:host >>> .axis line,
+:host >>> .axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+:host >>> .axis--x path {
+  display: none;
+}

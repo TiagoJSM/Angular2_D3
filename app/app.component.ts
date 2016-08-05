@@ -11,6 +11,7 @@ import './rxjs-extensions';
     <a [routerLink]="['/bar-chart']" routerLinkActive="active">Bar Chart</a>
     <a [routerLink]="['/circles']" routerLinkActive="active">Circles</a>
     <a [routerLink]="['/pie-chart']" routerLinkActive="active">Pie Chart</a>
+    <a [routerLink]="['/stacked-chart']" routerLinkActive="active">Stack Chart</a>
 	</nav>
 	<router-outlet></router-outlet>
   `,
