@@ -1,0 +1,10 @@
+:host >>> body {
+  font: 10px sans-serif;
+}
+
+:host >>> .axis path,
+:host >>> .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}

@@ -16,7 +16,7 @@ export class StackedChartComponent implements OnInit {
 			{source: "Market Average" , returnSeeking: 0.93, capitalPreserved: 0.07},
             {source: "Sample Client" , returnSeeking: 0.91, capitalPreserved: 0.09},
 		];
-
+        
 		const percentages = ["returnSeeking", "capitalPreserved"];
         const svgElem = d3.select(".svg");
 
@@ -43,12 +43,6 @@ export class StackedChartComponent implements OnInit {
         const svg = svgElem
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        const c = percentages.map(c => {
-            return data.map(d => {
-                return {x: d.source, y: d[c]};
-            }) as any;
-        });
 
         const layers = d3.layout.stack<{x: string, y: number, y0: number}>()(percentages.map(c => {
             return data.map(d => {

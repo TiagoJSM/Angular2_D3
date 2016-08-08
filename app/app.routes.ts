@@ -4,6 +4,7 @@ import { BarChartComponent } from './components/barChart/bar-chart.component'
 import { CirclesComponent } from './components/circles/circles.component'
 import { PieChartComponent } from './components/pieChart/pie-chart.component'
 import { StackedChartComponent } from './components/stackedChart/stacked-chart.component'
+import { StackedAreaChartComponent } from './components/stackedAreaChart/stacked-area-chart.component'
 
 const routes: RouterConfig = [
 	{
@@ -26,6 +27,10 @@ const routes: RouterConfig = [
 	{
 		path: 'stacked-chart',
 		component: StackedChartComponent
+	},
+	{
+		path: 'stacked-area-chart',
+		component: StackedAreaChartComponent
 	},
 ];
 
